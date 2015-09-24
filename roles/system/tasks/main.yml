@@ -1,0 +1,10 @@
+- name: Update system package
+  sudo: yes
+  apt: upgrade=safe state=present update_cache=yes
+- name: Basic installation (build-essential curl git)
+  sudo: yes
+  apt: name={{item}}
+  with_items:
+    - build-essential
+    - curl
+    - git
