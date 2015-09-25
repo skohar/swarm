@@ -1,10 +1,60 @@
 - name: Update system package
   sudo: yes
-  apt: upgrade=safe state=present update_cache=yes
+  apt:
+    upgrade: safe
+    state: present
+    update_cache: yes
+- name: Configure resolvconf
+  sudo: yes
+  lineinfile:
+    dest: /etc/resolvconf/resolv.conf.d/base
+    line: 'options single-request-reopen'
+  register: modify_resolvconf
+- name: Update resolvconf
+  when: modify_resolvconf | changed
+  sudo: yes
+  command: resolvconf -u
 - name: Basic installation (build-essential curl git)
   sudo: yes
-  apt: name={{item}}
+  apt:
+    name: "{{item}}"
   with_items:
     - build-essential
     - curl
     - git
+# Installing NodeJS
+- name: Verify node installation
+  shell: type node
+  register: verify_node
+  failed_when: false # Never be failure
+  changed_when: verify_node | failed
+- name: Download node package
+  when: verify_node | failed
+  sudo: yes
+  shell: curl -sL https://deb.nodesource.com/setup_{{node_version}} | bash -
+- name: Install NodeJS
+  when: verify_node | failed
+  sudo: yes
+  apt:
+    name: nodejs
+# Installing Docker
+- name: Verify docker installation
+  shell: type docker
+  register: verify_docker
+  failed_when: false # Never be failure
+  changed_when: verify_docker | failed
+- name: Install docker
+  when: verify_docker | failed
+  sudo: yes
+  shell: curl -o- https://get.docker.com/ | sh
+- name: Update group to enable docker without sudo
+  when: verify_docker | failed
+  sudo: yes
+  shell: usermod -aG docker {{os_user}}
+- name: restart service
+  sudo: yes
+  when: verify_docker | failed
+  service:
+    name: docker
+    enabled: yes
+    state: restarted
