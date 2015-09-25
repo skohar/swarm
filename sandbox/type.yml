@@ -1,0 +1,17 @@
+# check whether type command works or not
+- hosts: all
+  user: "{{ os_user }}"
+  sudo: no
+  tasks:
+    - name: type ls by shell
+      shell: "type ls"
+      ignore_errors: true
+    - name: type ls by command
+      command: "type ls"
+      ignore_errors: true
+    - name: type -af ls by shell
+      shell: "type -af ls"
+      ignore_errors: true
+    - name: type -af ls by command
+      command: "type -af ls"
+      ignore_errors: true
