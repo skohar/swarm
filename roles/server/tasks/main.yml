@@ -1,0 +1,15 @@
+- name: Pull docker
+  sudo: yes
+  docker:
+    registry: hub.docker.com
+    image: givery/codecheck
+    state: restarted
+    pull: always
+- name: Install forever
+  sudo: yes
+  npm:
+    global: yes
+    name: forever
+    state: latest
+    production: yes
+

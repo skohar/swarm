@@ -4,3 +4,4 @@
   roles:
     - ping
     - system
+    - server
