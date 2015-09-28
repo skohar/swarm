@@ -2,6 +2,6 @@
   user: "{{ os_user }}"
   sudo: no
   roles:
-    - ping
+    # - ping
     - system
     - server

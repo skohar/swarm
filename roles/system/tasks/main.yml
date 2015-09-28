@@ -58,3 +58,14 @@
     name: docker
     enabled: yes
     state: restarted
+# Installing pip
+- name: Installing pip
+  sudo: yes
+  apt:
+    name: python-pip
+# Install docker-py to avoid ansible bug
+# https://github.com/ansible/ansible-modules-core/issues/1792
+- name: Install Docker py
+  sudo: yes
+  pip:
+    name: docker-py
