@@ -1,3 +1,9 @@
+dependencies:
+  cache_directories:
+    - vagrant
+    - ~/.vagrant.d
+  pre:
+    - bash ./install-vagrant-1.4.0.sh
 test:
   pre:
     - vagrant up
