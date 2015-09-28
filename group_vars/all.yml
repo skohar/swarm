@@ -2,3 +2,4 @@
 ---
 node_version: 4.x
 github_token: "{{ lookup('env', 'GITHUB_TOKEN') }}"
+clone_path: /var/testserver

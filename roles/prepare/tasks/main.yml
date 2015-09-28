@@ -1,0 +1,26 @@
+# Installing pip
+- name: Installing pip
+  sudo: yes
+  apt:
+    name: python-pip
+# Install docker-py to avoid ansible bug
+# https://github.com/ansible/ansible-modules-core/issues/1792
+- name: Install Docker py
+  sudo: yes
+  pip:
+    name: docker-py
+# pull docker image from Docker Hub
+- name: Pull docker
+  sudo: yes
+  docker:
+    registry: hub.docker.com
+    image: givery/codecheck
+    state: restarted
+    pull: always
+- name: Install forever
+  sudo: yes
+  npm:
+    global: yes
+    name: forever
+    state: latest
+    production: yes

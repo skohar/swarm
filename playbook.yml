@@ -3,5 +3,6 @@
   sudo: no
   roles:
     # - ping
-    - system
-    - server
+    - installation
+    - prepare
+    - setup
