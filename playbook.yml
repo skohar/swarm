@@ -2,6 +2,6 @@
   user: "{{ os_user }}"
   sudo: no
   roles:
-    - installation
+    - initial-install
     - prepare
     - setup

@@ -12,6 +12,10 @@
     dest: "{{source_path}}"
     recursive: no
       # Set to ignore submodule; codetest-env is currently private and can't install by submodule
+- name: npm install
+  npm:
+    path: "{{source_path}}"
+    state: present
 - name: Install init config
   sudo: yes
   template:
