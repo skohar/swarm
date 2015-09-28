@@ -1,0 +1,5 @@
+---
+papertrail_host: "{{ lookup('env', 'PAPERTRAIL_HOST') }}"
+docker_image: codecheck
+docker_tag: latest
+source_path: /var/testserver
