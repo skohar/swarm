@@ -1,0 +1,26 @@
+# Prepare test server script
+- name: Prapare directory to clone
+  sudo: yes
+  file:
+    state: directory
+    owner: "{{ os_user }}"
+    path: "{{source_path}}"
+- name: Clone test server scripts
+  git:
+    accept_hostkey: yes
+    repo: https://{{github_token}}@github.com/givery-technology/code-testserver.git
+    dest: "{{source_path}}"
+    recursive: no
+      # Set to ignore submodule; codetest-env is currently private and can't install by submodule
+- name: npm install
+  npm:
+    path: "{{source_path}}"
+    state: present
+- name: Install init config
+  sudo: yes
+  template:
+    src: codecheck.conf.j2
+    dest: /etc/init/codecheck.conf
+- name: Start test run server
+  sudo: yes
+  command: service codecheck start
