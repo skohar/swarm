@@ -1,9 +1,9 @@
+machine:
+  services:
+    - docker
 dependencies:
-  cache_directories:
-    - vagrant
-    - ~/.vagrant.d
-  pre:
-    - bash ./install-vagrant-1.4.0.sh
+  override:
+   - date
 test:
-  pre:
-    - vagrant up
+  override:
+    - docker build -t code-check/codecheck:latest .
