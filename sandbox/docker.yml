@@ -1,0 +1,15 @@
+# check docker module
+- hosts: all
+  user: "{{ os_user }}"
+  sudo: no
+  vars:
+    docker_version: 1.20
+  tasks:
+  - name: Pull docker
+    docker:
+      docker_api_version: "{{ docker_version }}"
+      image: hellow-world
+      state: restarted
+      pull: always
+      env:
+          DEFAULT_DOCKER_API_VERSION: "{{ docker_version }}"

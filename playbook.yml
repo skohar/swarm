@@ -2,5 +2,7 @@
   user: "{{ os_user }}"
   sudo: no
   roles:
-    - ping
-    - system
+    # - ping
+    - installation
+    - prepare
+    - setup
