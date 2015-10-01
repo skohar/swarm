@@ -2,8 +2,8 @@ machine:
   services:
     - docker
 dependencies:
-  override:
-   - date
+  pre:
+    - sudo pip install ansible
 test:
   override:
     - ./circle-test.sh
