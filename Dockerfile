@@ -1,4 +1,4 @@
-FROM ubuntu:14.04.02
+FROM ubuntu:14.04
 MAINTAINER Sven Dowideit <SvenDowideit@docker.com>
 
 RUN apt-get update && apt-get install -y openssh-server
