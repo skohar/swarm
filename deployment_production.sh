@@ -6,4 +6,4 @@ instanceIds=$(aws ec2 run-instances --region ap-northeast-1 --image-id ami-936d9
 instanceIdBelongedElb=$(aws elb describe-load-balancers --load-balancer-names codecheck-dev | jq -r '.LoadBalancerDescriptions[].Instances[].InstanceId')
 aws ec2 create-tags --region ap-northeast-1 --resources $instanceIds --tags Key=Name,Value=code-check-prod-$(echo $CIRCLE_SHA1 | cut -c 1-7)-$(git rev-parse --short HEAD)
 aws elb register-instances-with-load-balancer --region ap-northeast-1 --load-balancer-name codecheck-dev --instances $instanceId
-aws elb deregister-instances-from-load-balancer --load-balancer-name codecheck-dev --instances $instanceIds 
+aws elb deregister-instances-from-load-balancer --region ap-northeast-1 --load-balancer-name codecheck-dev --instances $instanceIds 
