@@ -1,0 +1,9 @@
+machine:
+  services:
+    - docker
+dependencies:
+  pre:
+    - sudo pip install ansible
+test:
+  override:
+    - ./circle-test.sh
