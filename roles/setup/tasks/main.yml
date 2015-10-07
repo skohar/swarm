@@ -8,10 +8,10 @@
 - name: Clone test server scripts
   git:
     accept_hostkey: yes
-    repo: https://{{github_token}}@github.com/givery-technology/code-testserver.git
+    repo: https://{{github_token}}@github.com/givery-technology/whale-server.git
     dest: "{{source_path}}"
     recursive: no
-      # Set to ignore submodule; codetest-env is currently private and can't install by submodule
+      # Set to ignore submodule; whale-env is currently private and can't install by submodule
 - name: npm install
   npm:
     path: "{{source_path}}"
