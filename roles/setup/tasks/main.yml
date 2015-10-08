@@ -3,7 +3,7 @@
   sudo: yes
   file:
     state: directory
-    owner: "{{ ansible_ssh_user }}"
+    owner: "{{ ansible_env.USER }}"
     path: "{{source_path}}"
 - name: Clone test server scripts
   git:

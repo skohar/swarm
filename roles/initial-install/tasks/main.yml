@@ -50,7 +50,7 @@
 - name: Update group to enable docker without sudo
   when: verify_docker | failed
   sudo: yes
-  shell: usermod -aG docker {{ ansible_ssh_user }}
+  shell: usermod -aG docker {{ ansible_env.USER }}
 - name: restart service
   sudo: yes
   when: verify_docker | failed
