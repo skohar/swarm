@@ -23,7 +23,9 @@
     dest: /etc/init/codecheck.conf
 - name: Start test run server
   sudo: yes
-  command: service codecheck start
+  service:
+    name: codecheck
+    state: started
 - name: Cron for docker
   cron:
     name: "Clean up docker containers"
