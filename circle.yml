@@ -6,10 +6,10 @@ dependencies:
     - "~/bin"
   pre:
     - mkdir -p ~/bin
-    - ci/dependencies.sh
+    - ./dependencies.sh
 test:
   override:
-    - ./ci/packer-validate.sh
+    - ./packer-validate.sh
 deployment:
   production:
     branch: deployment/production
