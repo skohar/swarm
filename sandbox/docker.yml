@@ -1,6 +1,5 @@
 # check docker module
 - hosts: all
-  user: "{{ os_user }}"
   sudo: no
   vars:
     docker_version: 1.20
