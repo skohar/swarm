@@ -1,12 +1,15 @@
 machine:
-  services:
-    - docker
+  environment:
+    PATH: "${HOME}/bin:${PATH}"
 dependencies:
+  cache_directories:
+    - "~/bin"
   pre:
-    - sudo pip install ansible
+    - mkdir -p ~/bin
+    - ci/dependencies.sh
 test:
   override:
-    - ./circle-test.sh
+    - ./ci/packer-validate.sh
 deployment:
   production:
     branch: deployment/production
