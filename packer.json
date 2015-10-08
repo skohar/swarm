@@ -1,48 +1,48 @@
 {
-  "variables": {
-    "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
-    "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}"
-  },
-  "builders": [
-    {
-      "type": "amazon-ebs",
-      "access_key": "{{user `AWS_ACCESS_KEY_ID`}}",
-      "secret_key": "{{user `AWS_SECRET_ACCESS_KEY`}}",
-      "region": "us-east-1",
-      "source_ami": "ami-d05e75b8",
-      "instance_type": "t2.micro",
-      "ssh_username": "ubuntu",
-      "ami_name": "packer-{{timestamp}}",
-      "vpc_id": "vpc-1731e973",
-      "subnet_id": "subnet-596cbb64",
-      "iam_instance_profile": "packerRole"
-    }
-  ],
-  "provisioners": [
-    {
-      "type": "shell",
-      "inline": [
-        "sleep 30",
-        "sudo apt-add-repository ppa:ansible/ansible",
-        "sudo apt-get update",
-        "sudo apt-get install -y ansible",
-        "sudo apt-get install -y python-pip",
-        "sudo pip install awscli"
-      ]
-    },
-    {
-      "type": "shell",
-      "inline_shebang": "/bin/bash -e",
-      "inline": [
-        "aws s3 cp s3://code-check-config-packer/env.sh .",
-        "source env.sh"
-      ]
-    },
-    {
-      "type": "ansible-local",
-      "command": "ansible-playbook",
-      "playbook_file": "{{template_dir}}/playbook.yml",
-      "playbook_dir": "{{template_dir}}"
-    }
-  ]
+  "variables": {
+    "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `AWS_ACCESS_KEY_ID`}}",
+      "secret_key": "{{user `AWS_SECRET_ACCESS_KEY`}}",
+      "region": "us-east-1",
+      "source_ami": "ami-d05e75b8",
+      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "packer-{{timestamp}}",
+      "vpc_id": "vpc-1731e973",
+      "subnet_id": "subnet-596cbb64",
+      "iam_instance_profile": "packerRole"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sleep 30",
+        "sudo apt-add-repository ppa:ansible/ansible",
+        "sudo apt-get update",
+        "sudo apt-get install -y ansible",
+        "sudo apt-get install -y python-pip",
+        "sudo pip install awscli"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline_shebang": "/bin/bash -e",
+      "inline": [
+        "aws s3 cp s3://code-check-config-packer/env.sh .",
+        "source env.sh"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "command": "ansible-playbook",
+      "playbook_file": "{{template_dir}}/playbook.yml",
+      "playbook_dir": "{{template_dir}}"
+    }
+  ]
 }
