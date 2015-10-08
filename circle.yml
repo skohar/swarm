@@ -7,3 +7,12 @@ dependencies:
 test:
   override:
     - ./circle-test.sh
+deploy:
+  production:
+    branch: deployment/production
+    commands: 
+      - date
+  staging:
+    branch: master
+    commands:
+     - packer build packer.json
