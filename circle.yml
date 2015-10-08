@@ -7,7 +7,7 @@ dependencies:
 test:
   override:
     - ./circle-test.sh
-deploy:
+deployment:
   production:
     branch: deployment/production
     commands: 
