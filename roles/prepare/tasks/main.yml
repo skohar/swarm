@@ -15,8 +15,10 @@
   docker:
     registry: hub.docker.com
     image: givery/codecheck
-    state: restarted
+    state: reloaded
     pull: always
+  register: docker_pull
+  changed_when: docker_pull.summary.pulled != 0
 - name: Install forever
   sudo: yes
   npm:
