@@ -1,3 +1,0 @@
-- name: pong
-  command: echo pong
-  changed_when: false

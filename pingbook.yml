@@ -1,0 +1,12 @@
+- hosts: all
+  sudo: no
+  tasks:
+  - name: pong
+    command: echo pong
+    changed_when: false
+  - name: magic --- ansible login user
+    debug:
+      var: ansible_ssh_user
+  - name: custom --- which environment am I?
+    debug:
+      var: env
