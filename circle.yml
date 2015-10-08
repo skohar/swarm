@@ -16,6 +16,6 @@ deployment:
     commands: 
       - date
   staging:
-    branch: master
+    branch: packer
     commands:
      - packer build packer.json
