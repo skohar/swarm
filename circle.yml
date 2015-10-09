@@ -1,4 +1,6 @@
 machine:
+  python:
+    version: python 2.7.10
   environment:
     PATH: "${HOME}/bin:${PATH}"
 dependencies:
@@ -7,7 +9,6 @@ dependencies:
   pre:
     - mkdir -p ~/bin
     - ./dependencies.sh
-    - sudo apt-get install -y python2.7
 test:
   override:
     - ./packer-validate.sh
