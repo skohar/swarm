@@ -4,6 +4,7 @@
       "type": "amazon-ebs",
       "source_ami": "ami-d05e75b8",
       "instance_type": "t2.micro",
+      "region": "us-east-1",
       "ssh_username": "ubuntu",
       "ami_name": "packer-{{timestamp}}",
       "vpc_id": "vpc-1731e973",
