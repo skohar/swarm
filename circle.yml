@@ -11,7 +11,7 @@ dependencies:
     - ./dependencies.sh
 test:
   override:
-    - ./packer-validate.sh
+    - packer validate packer.json
 deployment:
   production:
     branch: deployment/production
