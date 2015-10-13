@@ -1,4 +1,0 @@
-# common variables to set
----
-node_version: 4.x
-github_token: "{{ lookup('env', 'GITHUB_TOKEN') }}"

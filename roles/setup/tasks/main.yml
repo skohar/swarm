@@ -3,8 +3,8 @@
   sudo: yes
   file:
     state: directory
-    owner: "{{ os_user }}"
-    path: "{{ source_path }}"
+    owner: "{{ ansible_env.USER }}"
+    path: "{{source_path}}"
 - name: Clone test server scripts
   git:
     accept_hostkey: yes

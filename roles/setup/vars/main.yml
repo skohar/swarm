@@ -1,4 +1,5 @@
 ---
+github_token: "{{ lookup('env', 'GITHUB_TOKEN') }}"
 papertrail_host: "{{ lookup('env', 'PAPERTRAIL_HOST') }}"
 docker_image: codecheck
 docker_tag: latest

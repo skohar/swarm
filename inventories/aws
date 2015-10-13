@@ -1,0 +1,7 @@
+[aws]
+localhost
+
+[aws:vars]
+ansible_connection=local
+ansible_ssh_user=ubuntu
+env=aws

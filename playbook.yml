@@ -1,5 +1,4 @@
 - hosts: all
-  user: "{{ os_user }}"
   sudo: no
   roles:
     - initial-install
