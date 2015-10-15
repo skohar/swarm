@@ -11,3 +11,9 @@
     debug:
       var: env
   - include: roles/initial-install/tasks/docker.yml
+  - name: Purge for old repo
+    sudo: yes
+    apt:
+      name: "lxc-docker*"
+      state: absent
+      purge: yes
