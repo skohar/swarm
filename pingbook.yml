@@ -10,3 +10,4 @@
   - name: custom --- which environment am I?
     debug:
       var: env
+  - include: roles/initial-install/tasks/docker.yml
