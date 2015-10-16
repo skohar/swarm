@@ -37,7 +37,7 @@
       "command": "ansible-playbook",
       "playbook_file": "{{template_dir}}/playbook.yml",
       "playbook_dir": "{{template_dir}}",
-      "inventory_file": "{{template_dir}}/aws"
+      "inventory_file": "{{template_dir}}/inventories/aws"
     }
   ]
 }
