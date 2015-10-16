@@ -35,8 +35,8 @@
       "type": "shell",
       "inline_shebang": "/bin/bash -e",
       "inline": [
-        "aws s3 cp s3://code-check-config-packer/env.sh .",
-        "sudo mv env.sh /etc/profile.d/env.sh"
+        "aws s3 cp s3://code-check-config-packer/env.json .",
+        "mv env.json /tmp"
       ]
     },
     {
