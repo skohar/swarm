@@ -46,7 +46,7 @@
       "playbook_dir": "{{template_dir}}",
       "inventory_file": "{{template_dir}}/inventories/aws",
       "extra_arguments": [
-        "--extra-vars"
+        "--extra-vars",
         "@/tmp/env.json"
       ]
     }
