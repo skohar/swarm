@@ -7,10 +7,16 @@
       "region": "us-east-1",
       "ssh_username": "ubuntu",
       "ami_name": "packer-{{timestamp}}",
-      "volume_size": 30,
       "vpc_id": "vpc-1731e973",
       "subnet_id": "subnet-596cbb64",
-      "iam_instance_profile": "packerRole"
+      "iam_instance_profile": "packerRole",
+      "launch_block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "volume_size": 30,
+          "delete_on_termination": true
+        }
+      ]
     }
   ],
   "provisioners": [
