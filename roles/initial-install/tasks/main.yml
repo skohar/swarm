@@ -26,14 +26,14 @@
 - name: Verify node installation
   shell: type node
   register: verify_node
-  failed_when: false # Never be failure
-  changed_when: verify_node | failed
+  failed_when: verify_node.rc not in [0, 1, 127]
+  changed_when: verify_node.rc in [1, 127]
 - name: Download node package
-  when: verify_node | failed
+  when: verify_node | changed
   sudo: yes
   shell: curl -sL https://deb.nodesource.com/setup_{{node_version}} | bash -
 - name: Install NodeJS
-  when: verify_node | failed
+  when: verify_node | changed
   sudo: yes
   apt:
     name: nodejs
@@ -41,32 +41,32 @@
 - name: Verify docker installation
   shell: type docker
   register: verify_docker
-  failed_when: false # Never be failure
-  changed_when: verify_docker | failed
+  failed_when: verify_docker.rc not in [0, 1, 127]
+  changed_when: verify_docker.rc in [1, 127]
 - name: Install docker
-  when: verify_docker | failed
+  when: verify_docker | changed
   sudo: yes
   shell: curl -o- https://get.docker.com/ | sh
 - name: Update group to enable docker without sudo
-  when: verify_docker | failed
   sudo: yes
-  shell: usermod -aG docker {{ ansible_env.USER }}
+  user:
+    name: "{{ ansible_user_id }}"
+    groups: docker
+    append: yes
 - name: restart service
   sudo: yes
-  when: verify_docker | failed
   service:
     name: docker
     enabled: yes
     state: restarted
+  register: docker_restart
+  changed_when: False
 - name: Update motd
   sudo: yes
   copy:
     src: motd.j2
     dest: /etc/update-motd.d/99-environment
     mode: 0755
-- name: debug `env`
-  debug:
-    var: env
 - name: Set environment file
   sudo: yes
   copy:
