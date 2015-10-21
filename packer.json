@@ -7,8 +7,8 @@
       "region": "us-east-1",
       "ssh_username": "ubuntu",
       "ami_name": "packer-{{timestamp}}",
-      "vpc_id": "vpc-1731e973",
-      "subnet_id": "subnet-596cbb64",
+      "vpc_id": "vpc-55238031",
+      "subnet_id": "subnet-7da38956",
       "iam_instance_profile": "packerRole",
       "launch_block_device_mappings": [
         {
