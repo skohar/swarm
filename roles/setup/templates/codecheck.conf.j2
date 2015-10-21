@@ -6,4 +6,4 @@ env DOCKER_IMAGE_VERSION={{docker_tag}}
 start on startup
 stop on runlevel [!2345]
 
-exec forever start --uid "{{forever_uid}}" --append -m 1 {{source_path}}/server.js
+exec forever start --uid "{{forever_uid}}" -m 1 {{source_path}}/server.js
