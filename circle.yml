@@ -16,8 +16,8 @@ deployment:
   production:
     branch: deployment/production
     commands: 
-      - date
+      - ./deployment_production.sh
   staging:
-    branch: packer
+    branch: master
     commands:
-     - ./deployment_production.sh
+      - ./deployment_production.sh
