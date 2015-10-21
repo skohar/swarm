@@ -8,7 +8,7 @@
       "ssh_username": "ubuntu",
       "ami_name": "packer-{{timestamp}}",
       "vpc_id": "vpc-55238031",
-      "subnet_id": "subnet-7da38956",
+      "subnet_id": "subnet-ead3e6c1",
       "iam_instance_profile": "packerRole",
       "launch_block_device_mappings": [
         {
