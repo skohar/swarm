@@ -10,5 +10,5 @@ set -e
 #ansible-playbook -i inventories/aws playbook.yml 
 #aws elb register-instances-with-load-balancer --region ap-northeast-1 --load-balancer-name codecheck-dev --instances $instanceIds
 #aws elb deregister-instances-from-load-balancer --region ap-northeast-1 --load-balancer-name codecheck-dev --instances $instanceIds
-packer build packer.json
+packer build -var "git_branch_name=$(git rev-parse --abbrev-ref HEAD)" -var "git_short_hash=$(git rev-parse --short HEAD)" packer.json
 kill %1
