@@ -18,6 +18,6 @@ deployment:
     commands: 
       - ./deployment_production.sh
   staging:
-    branch: master
+    branch: ami-image-name
     commands:
       - ./deployment_production.sh

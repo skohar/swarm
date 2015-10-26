@@ -6,7 +6,7 @@
       "instance_type": "t2.micro",
       "region": "us-east-1",
       "ssh_username": "ubuntu",
-      "ami_name": "packer-{{timestamp}}",
+      "ami_name": "whale-{{isotime \"2006-01-02_15-04-05\"}}",
       "vpc_id": "vpc-55238031",
       "subnet_id": "subnet-ead3e6c1",
       "iam_instance_profile": "packerRole",
