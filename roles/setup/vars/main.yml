@@ -1,7 +1,7 @@
 ---
 github_token: "{{ lookup('env', 'GITHUB_TOKEN') }}"
 papertrail_host: "{{ lookup('env', 'PAPERTRAIL_HOST') }}"
-docker_image: codecheck
+docker_image: givery/codecheck
 docker_tag: latest
 source_path: /var/testserver
 forever_uid: whale
