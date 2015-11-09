@@ -3,6 +3,10 @@ machine:
     version: 2.7.10
   environment:
     PATH: "${HOME}/bin:${PATH}"
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init
 dependencies:
   cache_directories:
     - "~/bin"
