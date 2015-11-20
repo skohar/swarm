@@ -12,4 +12,6 @@ env DOCKER_IMAGE_VERSION={{docker_tag}}
 start on startup
 stop on runlevel [!2345]
 
-exec forever start --uid "{{forever_uid}}" -o /dev/null -m 1 {{source_path}}/server.js
+# `--append` option is needed when you specified log file which exsists, even /dev/null
+exec forever start --uid "whale" -l /dev/null -m 1 --append /var/testserver/server.js
+
