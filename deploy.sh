@@ -1,4 +1,6 @@
 #!/bin/bash
 (while true; do echo "Don't DIE!!!!"; sleep 60; done) & # jobs %1
-packer build -var "git_branch_name=$(git rev-parse --abbrev-ref HEAD)" -var "git_short_hash=$(git rev-parse --short HEAD)" -var "env-builder_git_branch_name=$(git submodule foreach git rev-parse --abbrev-ref HEAD | grep -v 'Entering')" -var "env-builder_git_short_hash=$(git submodule foreach git rev-parse --short HEAD | grep -v 'Entering')" packer.json
+DATE_TIME=`date -u +%FT%TZ | sed 's/://g' | sed 's/-//g'`
+AMI_NAME=whale-$DATE_TIME-$(git rev-parse --abbrev-ref HEAD)-$(git rev-parse --short HEAD)-$(cd env-builder && git checkout -q master && git rev-parse --abbrev-ref HEAD)-$(cd env-builder && git rev-parse --short HEAD)
+packer build -var $AMI_NAME packer.json
 kill %1
