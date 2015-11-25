@@ -1,9 +1,17 @@
 description "codecheck test running server AKA whale"
+# Environment variables used in github.com/givery-technology/whale-server
+## Paper trail
 env PAPERTRAIL_HOST={{papertrail_host}}
+## Docker
+# env DOCKER_OPTIONS=""
+# env DOCKER_TIMEOUT=600 # Default is 10 minutes
+# env DOCKER_CONCURRENCY=5
 env DOCKER_IMAGE_NAME={{docker_image}}
 env DOCKER_IMAGE_VERSION={{docker_tag}}
 
 start on startup
 stop on runlevel [!2345]
 
-exec forever start --uid "{{forever_uid}}" --append -m 1 {{source_path}}/server.js
+# `--append` option is needed when you specified log file which exsists, even /dev/null
+exec forever start --uid "whale" -l /dev/null -m 1 --append /var/testserver/server.js
+
