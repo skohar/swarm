@@ -42,5 +42,4 @@
     name: docker
     enabled: yes
     state: restarted
-  register: docker_restart
   changed_when: False
