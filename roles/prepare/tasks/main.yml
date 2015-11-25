@@ -10,6 +10,18 @@
   pip:
     name: docker-py
 # pull docker image from Docker Hub
+- name: verify if docker is running
+  sudo: yes
+  shell: service docker status
+  register: docker_service_status
+  failed_when: "'Docker is' not in docker_service_status.stdout"
+  changed_when: "'not running' in docker_service_status.stdout"
+- name: start docker service
+  when: "'not running' in docker_service_status.stdout"
+  sudo: yes
+  shell: service docker start
+  register: start_docker_service
+  failed_when: start_docker_service.rc != 0
 - name: Pull docker
   sudo: yes
   docker:
@@ -19,6 +31,24 @@
     pull: always
   register: docker_pull
   changed_when: docker_pull.summary.pulled != 0
+- name: Create cache container
+  sudo: yes
+  docker:
+    name: cache-master
+    image: givery/codecheck:latest
+    state: present
+    volumes:
+    - /root/.npm
+    - /root/.cabal
+    - /root/.composer
+    - /root/.gem
+    - /root/.ghc
+    - /root/.gradle
+    - /root/.ivy2
+    - /root/.m2
+    - /root/.mono
+    - /root/.sbt
+    - /root/go
 - name: Install forever
   sudo: yes
   npm:
