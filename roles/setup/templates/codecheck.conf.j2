@@ -3,7 +3,7 @@ description "codecheck test running server AKA whale"
 ## Paper trail
 env PAPERTRAIL_HOST={{ papertrail_host }}
 ## Docker
-env DOCKER_OPTIONS="--volumes-from='cache-master' --memory='512M' --memory-swap='-1'"
+env DOCKER_OPTIONS="--volumes-from='cache-master' --memory='512M' --memory-swap='-1' --memory-swappiness='0'"
 # env DOCKER_TIMEOUT=600 # Default is 10 minutes
 # env DOCKER_CONCURRENCY=5
 env DOCKER_IMAGE_NAME={{ docker_image }}
