@@ -13,5 +13,5 @@ start on startup
 stop on runlevel [!2345]
 
 # `--append` option is needed when you specified log file which exsists, even /dev/null
-exec forever start --uid "whale" -l /dev/null -m 1 --append /var/testserver/server.js
+exec forever start --uid "whale" -l /dev/null -m 1 --append /var/{{ source_path }}/server.js
 
