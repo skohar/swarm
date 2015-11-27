@@ -3,5 +3,5 @@ github_token: "{{ lookup('env', 'GITHUB_TOKEN') }}"
 papertrail_host: "{{ lookup('env', 'PAPERTRAIL_HOST') }}"
 docker_image: givery/codecheck
 docker_tag: latest
-source_path: /var/testserver
+source_path: /var/whale-server
 forever_uid: whale
