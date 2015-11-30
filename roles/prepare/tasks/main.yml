@@ -12,12 +12,12 @@
 # pull docker image from Docker Hub
 - name: verify if docker is running
   sudo: yes
-  shell: service docker status
-  register: docker_service_status
-  failed_when: "'Docker is' not in docker_service_status.stdout"
-  changed_when: "'not running' in docker_service_status.stdout"
+  shell: docker info
+  register: verify_docker_info
+  failed_when: False
+  changed_when: verify_docker_info.rc != 0
 - name: start docker service
-  when: "'not running' in docker_service_status.stdout"
+  when: verify_docker_info | changed
   sudo: yes
   shell: service docker start
   register: start_docker_service
