@@ -1,10 +1,10 @@
 # Prepare test server script
-#- name: Prapare directory to clone
-#  sudo: yes
-#  file:
-#    state: directory
-#    owner: "{{ ansible_user_id }}"
-#    path: "{{ source_path }}"
+- name: Prapare directory to clone
+  sudo: yes
+  file:
+    state: directory
+    owner: "{{ ansible_user_id }}"
+    path: "{{ source_path }}"
 - name: Clone test server scripts
   copy:
     src: /tmp/whale-server
