@@ -3,6 +3,14 @@ machine:
     version: 2.7.10
   environment:
     PATH: "${HOME}/bin:${PATH}"
+    REGION: us-east-1
+    SUBNET_ID: subnet-ee4c93d3
+    SECURITY_GROUP_ID: sg-ce6bb7a8
+    KEY_NAME: code-check-whale
+    COUNT: 2
+    INSTANCE_TYPE: t2.medium
+    DEV_COUNT: 1
+    DEV_INSTANCE_TYPE: t2.small
 checkout:
   post:
     - git submodule sync
@@ -20,8 +28,8 @@ deployment:
   production:
     branch: deployment/production
     commands:
-      - ./deploy.sh
+      - ./deploy.sh "whale"
   staging:
     branch: master
     commands:
-      - ./deploy.sh
+      - ./deploy.sh "whale-dev"
