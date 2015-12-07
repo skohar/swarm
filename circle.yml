@@ -9,7 +9,7 @@ checkout:
     - git submodule update --init
 dependencies:
   cache_directories:
-    - "~/bin"
+    - ~/bin
   pre:
     - mkdir -p ~/bin
     - ./dependencies.sh
