@@ -5,12 +5,10 @@
     state: directory
     owner: "{{ ansible_user_id }}"
     path: "{{ source_path }}"
-- name: Clone test server scripts
-  git:
-    accept_hostkey: yes
-    repo: https://{{ github_token }}@github.com/givery-technology/whale-server.git
+- name: Copy whale-server
+  copy:
+    src: /tmp/whale-server
     dest: "{{ source_path }}"
-    recursive: no
 - name: npm install
   npm:
     path: "{{ source_path }}"

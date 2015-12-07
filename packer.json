@@ -40,6 +40,11 @@
       ]
     },
     {
+      "type": "file",
+      "source": "whale-server",
+      "destination": "/tmp/whale-server"
+    },
+    {
       "type": "ansible-local",
       "command": "ansible-playbook",
       "playbook_file": "{{template_dir}}/playbook.yml",
