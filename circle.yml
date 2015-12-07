@@ -15,11 +15,12 @@ dependencies:
     - ./dependencies.sh
 test:
   override:
-    - source ami_name.sh && packer validate -var "AMI_NAME=name" packer.json
+    - source ami_name.sh && packer validate -var "AMI_NAME=`name`" packer.json
+    - ./deploy.sh
 deployment:
   production:
     branch: deployment/production
-    commands: 
+    commands:
       - ./deploy.sh
   staging:
     branch: master
