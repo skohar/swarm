@@ -1,34 +1,32 @@
 # Prepare test server script
-- name: Prapare directory to clone
-  sudo: yes
-  file:
-    state: directory
-    owner: "{{ ansible_user_id }}"
-    path: "{{ source_path }}"
+#- name: Prapare directory to clone
+#  sudo: yes
+#  file:
+#    state: directory
+#    owner: "{{ ansible_user_id }}"
+#    path: "{{ source_path }}"
 - name: Clone test server scripts
-  git:
-    accept_hostkey: yes
-    repo: https://{{ github_token }}@github.com/givery-technology/whale-server.git
+  copy:
+    src: /tmp/whale-server
     dest: "{{ source_path }}"
-    recursive: no
-- name: npm install
-  npm:
-    path: "{{ source_path }}"
-    state: present
-- name: Install init config
-  sudo: yes
-  template:
-    src: codecheck.conf.j2
-    dest: /etc/init/codecheck.conf
-- name: Start test run server
-  sudo: yes
-  service:
-    name: codecheck
-    state: started
-- name: Cron for docker
-  cron:
-    name: "Clean up docker containers"
-    minute: "0"
-    hour: "*/3"
-    job: "docker rm $(docker ps -f status=exited -q)"
-    state: present
+#- name: npm install
+#  npm:
+#    path: "{{ source_path }}"
+#    state: present
+#- name: Install init config
+#  sudo: yes
+#  template:
+#    src: codecheck.conf.j2
+#    dest: /etc/init/codecheck.conf
+#- name: Start test run server
+#  sudo: yes
+#  service:
+#    name: codecheck
+#    state: started
+#- name: Cron for docker
+#  cron:
+#    name: "Clean up docker containers"
+#    minute: "0"
+#    hour: "*/3"
+#    job: "docker rm $(docker ps -f status=exited -q)"
+#    state: present

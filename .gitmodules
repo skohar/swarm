@@ -1,3 +1,6 @@
 [submodule "env-builder"]
 	path = env-builder
 	url = https://github.com/code-check/env-builder.git
+[submodule "whale-server"]
+	path = whale-server
+	url = git@github.com:givery-technology/whale-server.git
