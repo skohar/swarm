@@ -30,3 +30,7 @@ instanceIdBelongedElb=$(aws elb describe-load-balancers --load-balancer-names ${
 aws ec2 create-tags --resources $instanceIds --tags Key=Name,Value=$INSTANCE_NAME
 ipAddress=$(aws ec2 describe-instances --instance-ids $instanceIds | jq -r '.Reservations[].Instances[].PublicIpAddress')
 aws elb register-instances-with-load-balancer --load-balancer-name ${1} --instances $instanceIds
+
+if [[ ${1} == "whale-dev" ]] then
+	aws elb deregister-instances-from-load-balancer --instances $instanceIdBelongedElb
+fi
