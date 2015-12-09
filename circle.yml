@@ -34,6 +34,6 @@ deployment:
     commands:
       - ./deploy.sh "whale-dev"
   develop:
-    branch: develop*
+    branch: /develop.*/
     commands:
     - ./deploy.sh "whale-dev"
