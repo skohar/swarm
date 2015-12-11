@@ -5,9 +5,6 @@
     state: directory
     owner: "{{ ansible_user_id }}"
     path: "{{ source_path }}"
-- shell: ls /var
-    register: result
-- debug: var=result
 - name: Copy whale-server
   copy:
     src: /tmp/whale-server
