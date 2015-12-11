@@ -23,7 +23,7 @@ dependencies:
     - ./cache_packer.sh
 test:
   override:
-    - source ami_name.sh && packer validate -var "AMI_NAME=$(name)" packer.json
+    - source ami_name.sh && PACKER_LOG=1 packer validate -var "AMI_NAME=$(name)" packer.json
 deployment:
   production:
     branch: deployment/production
@@ -36,4 +36,4 @@ deployment:
   develop:
     branch: /develop.*/
     commands:
-    - ./deploy.sh "whale-dev"
+    - PACKER_LOG=1 ./deploy.sh "whale-dev"
