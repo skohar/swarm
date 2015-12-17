@@ -1,3 +1,3 @@
 .vagrant
-.tfstate
-.tfstate.backup
+*.tfstate
+*.tfstate.backup
