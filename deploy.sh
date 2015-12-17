@@ -21,7 +21,6 @@ if [[ ${1} == "whale" ]]; then
 	$INSTANCE_NAME='whale'
 	$LOAD_BALANCER='whale'
 else
-	$COUNT=$DEV_COUNT
 	$INSTANCE_TYPE=$DEV_INSTANCE_TYPE
 	$INSTANCE_NAME='whale-dev'
 	$LOAD_BALANCER='whale-dev'
