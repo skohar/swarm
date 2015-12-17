@@ -33,7 +33,7 @@ deployment:
     branch: master
     commands:
       - ./deploy.sh "whale-dev"
-  dev:
+  develop:
     branch: bgd_terraform
     commands:
       - PACKER_LOG=1 ./deploy.sh "whale-dev"
