@@ -40,6 +40,10 @@
       ]
     },
     {
+      "type": "shell-local",
+      "command": "git submodule init && git submodule update"
+    },
+    {
       "type": "file",
       "source": "whale-server",
       "destination": "/tmp/whale-server"
