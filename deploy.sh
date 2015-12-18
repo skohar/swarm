@@ -21,7 +21,7 @@ if [[ ${1} == "whale" ]]; then
 	MIN_SIZE='2'
 	DESIRED_CAPACITY='2'
 	MAX_SIZE='5'
-	VAR_FILE='terraform-prod.tfvars'
+	VAR_FILE='./terraform/attach/terraform-prod.tfvars'
 else
 	INSTANCE_TYPE='t2.micro'
 	INSTANCE_NAME='whale-dev'
@@ -29,7 +29,7 @@ else
 	MIN_SIZE='1'
 	DESIRED_CAPACITY='1'
 	MAX_SIZE='1'
-	VAR_FILE='terraform-dev.tfvars'
+	VAR_FILE='./terraform/attach/terraform-dev.tfvars'
 fi
 
 AWS_DEFAULT_REGION='us-east-1'
