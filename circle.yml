@@ -20,7 +20,7 @@ dependencies:
     - ~/bin
   pre:
     - mkdir -p ~/bin
-    - ./cache_packer.sh
+    - ./install_softwares.sh
 test:
   override:
     - source ami_name.sh && PACKER_LOG=1 packer validate -var "AMI_NAME=$(name)" packer.json
