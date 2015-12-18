@@ -38,4 +38,4 @@ AMI_NAME="ami-a9e8abc3"
 cd $HOME/whale-env/terraform/attach && terraform plan -var "launch_configuration_name=$DATE" -var "auto_scaling_group_name=$DATE" -var "load_balancers=$LOAD_BALANCER" -var "instance_type=$INSTANCE_TYPE" -var "min_size=$MIN_SIZE" -var "desired_capacity=$DESIRED_CAPACITY" -var "max_size=$MAX_SIZE" -var "image_id=$AMI_NAME" -var-file=$VAR_FILE
 cd $HOME/whale-env/terraform/attach && terraform apply -var "launch_configuration_name=$DATE" -var "auto_scaling_group_name=$DATE" -var "load_balancers=$LOAD_BALANCER" -var "instance_type=$INSTANCE_TYPE" -var "min_size=$MIN_SIZE" -var "desired_capacity=$DESIRED_CAPACITY" -var "max_size=$MAX_SIZE" -var "image_id=$AMI_NAME" -var-file=$VAR_FILE
 
-[ ${1} == "whale-dev" ] && aws elb deregister-instances-from-load-balancer --instances $instanceIdBelongedElb
+#[ ${1} == "whale-dev" ] && aws elb deregister-instances-from-load-balancer --instances $instanceIdBelongedElb
