@@ -24,6 +24,7 @@ if [[ ${1} == "whale" ]]; then
 	MIN_SIZE='2'
 	DESIRED_CAPACITY='2'
 	MAX_SIZE='5'
+	VAR_FILE='terraform-prod.tfvars'
 else
 	INSTANCE_TYPE='t2.micro'
 	INSTANCE_NAME='whale-dev'
@@ -31,9 +32,10 @@ else
 	MIN_SIZE='1'
 	DESIRED_CAPACITY='1'
 	MAX_SIZE='1'
+	VAR_FILE='terraform-dev.tfvars'
 fi
 
-AWS_DEFAULT_REGION='us-east-1' DATE=$(date -u +%FT%TZ | sed 's/://g' | sed 's/-//g') terraform apply -var "launch_configuration_name=$DATE" -var "auto_scaling_group_name=$DATE" -var "load_balancers=$LOAD_BALANCER" -var "instance_type=$INSTANCE_TYPE" -var "min_size=$MIN_SIZE" -var "desired_capacity=$DESIRED_CAPACITY" -var "max_size=$MAX_SIZE" -var "image_id=$AMI_NAME" -var-file=terraform-dev.tfvars
+AWS_DEFAULT_REGION='us-east-1' DATE=$(date -u +%FT%TZ | sed 's/://g' | sed 's/-//g') terraform apply -var "launch_configuration_name=$DATE" -var "auto_scaling_group_name=$DATE" -var "load_balancers=$LOAD_BALANCER" -var "instance_type=$INSTANCE_TYPE" -var "min_size=$MIN_SIZE" -var "desired_capacity=$DESIRED_CAPACITY" -var "max_size=$MAX_SIZE" -var "image_id=$AMI_NAME" -var-file=$VAR_FILE
 
 #instanceIds=$(aws ec2 run-instances --image-id $AMI_NAME --subnet-id $SUBNET_ID --instance-type $INSTANCE_TYPE --security-group-id $SECURITY_GROUP_ID --key-name $KEY_NAME --associate-public-ip-address --count $COUNT | jq -r '.Instances[] .InstanceId')
 #instanceIdBelongedElb=$(aws elb describe-load-balancers --load-balancer-names ${1} | jq -r '.LoadBalancerDescriptions[].Instances[].InstanceId')
