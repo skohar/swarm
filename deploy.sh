@@ -9,7 +9,7 @@ set -u
 (while true; do echo "Packer is building AMI"; sleep 60; done) & # jobs %1
 source ami_name.sh
 AMI_NAME=$(name)
-AMI_ID=$(packer build -var "AMI_NAME=$AMI_NAME" packer.json)
+AMI_ID=$(packer build -machine-readable -var "AMI_NAME=$AMI_NAME" packer.json)
 echo '======='
 echo $AMI_ID
 echo '======='
