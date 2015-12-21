@@ -11,10 +11,7 @@ source ami_name.sh
 AMI_NAME=$(name)
 packer build -var "AMI_NAME=$AMI_NAME" packer.json 2>&1 | tee output.txt
 tail -2 output.txt | head -2 | awk 'match($0, /ami-.*/) { print substr($0, RSTART, RLENGTH) }' > ami.txt
-AMI_ID=$(sudo cat ami.txt)
-echo '======='
-echo $AMI_ID
-echo '======='
+AMI_ID=$(cat ami.txt)
 RESULT=$?
 kill %1
 [ $RESULT != 0 ] && exit $RESULT
@@ -36,6 +33,6 @@ else
 	VAR_FILE='terraform-dev.tfvars'
 fi
 AWS_DEFAULT_REGION='us-east-1'
-DATE=$(date -u +%FT%TZ | sed 's/://g' | sed 's/-//g')
+DATE=$(date -u +%Y%m%dT%H%M%SZ)
 cd $HOME/whale-env/terraform/attach && terraform plan -var "launch_configuration_name=$DATE" -var "auto_scaling_group_name=$DATE" -var "load_balancers=$LOAD_BALANCER" -var "instance_type=$INSTANCE_TYPE" -var "min_size=$MIN_SIZE" -var "desired_capacity=$DESIRED_CAPACITY" -var "max_size=$MAX_SIZE" -var "image_id=$AMI_ID" -var-file=$VAR_FILE
 cd $HOME/whale-env/terraform/attach && terraform apply -var "launch_configuration_name=$DATE" -var "auto_scaling_group_name=$DATE" -var "load_balancers=$LOAD_BALANCER" -var "instance_type=$INSTANCE_TYPE" -var "min_size=$MIN_SIZE" -var "desired_capacity=$DESIRED_CAPACITY" -var "max_size=$MAX_SIZE" -var "image_id=$AMI_ID" -var-file=$VAR_FILE
