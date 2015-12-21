@@ -11,6 +11,7 @@ machine:
     INSTANCE_TYPE: t2.medium
     DEV_COUNT: 1
     DEV_INSTANCE_TYPE: t2.small
+    PACKER_LOG: 1
 checkout:
   post:
     - git submodule sync
@@ -23,7 +24,7 @@ dependencies:
     - ./install_softwares.sh
 test:
   override:
-    - source ami_name.sh && PACKER_LOG=1 packer validate -var "AMI_NAME=$(name)" packer.json
+    - source ami_name.sh && packer validate -var "AMI_NAME=$(name)" packer.json
 deployment:
   production:
     branch: deployment/production
@@ -36,4 +37,4 @@ deployment:
   develop:
     branch: develop
     commands:
-      - PACKER_LOG=1 ./deploy.sh "whale-dev"
+      - ./deploy.sh "whale-dev"
