@@ -9,8 +9,8 @@ set -u
 (while true; do echo "Packer is building AMI"; sleep 60; done) & # jobs %1
 source ami_name.sh
 AMI_NAME=$(name)
-packer build -var "AMI_NAME=$AMI_NAME" packer.json 2>&1 | sudo tee output.txt
-tail -2 output.txt | head -2 | awk 'match($0, /ami-.*/) { print substr($0, RSTART, RLENGTH) }' > sudo ami.txt
+packer build -var "AMI_NAME=$AMI_NAME" packer.json 2>&1 | tee output.txt
+tail -2 output.txt | head -2 | awk 'match($0, /ami-.*/) { print substr($0, RSTART, RLENGTH) }' > ami.txt
 AMI_ID=$(sudo cat ami.txt)
 echo '======='
 echo $AMI_ID
