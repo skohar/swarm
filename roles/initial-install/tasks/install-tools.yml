@@ -1,0 +1,9 @@
+- name: Basic installation (build-essential curl git)
+  sudo: yes
+  apt:
+    name: "{{item}}"
+  with_items:
+    - build-essential
+    - curl
+    - git
+

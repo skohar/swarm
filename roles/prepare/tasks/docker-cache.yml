@@ -1,0 +1,20 @@
+---
+- name: Create cache container
+  sudo: yes
+  docker:
+    name: cache-master
+    image: givery/codecheck:latest
+    state: present
+    volumes:
+      - /root/.npm
+      - /root/.cabal
+      - /root/.composer
+      - /root/.gem
+      - /root/.ghc
+      - /root/.gradle
+      - /root/.ivy2
+      - /root/.m2
+      - /root/.mono
+      - /root/.sbt
+      - /root/go
+
