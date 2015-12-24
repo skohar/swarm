@@ -1,0 +1,14 @@
+# Prepare test server script
+- name: Prapare directory to clone
+  sudo: yes
+  file:
+    state: directory
+    owner: "{{ ansible_user_id }}"
+    path: "{{ source_path }}"
+- name: Copy whale-server
+  copy:
+    src: /tmp/whale-server/
+      # you must have trailing slash to copy file inside /tmp/whale-server
+      # without slash, it will copy /tmp/whale-server itself
+    dest: "{{ source_path }}"
+

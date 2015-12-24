@@ -1,34 +1,4 @@
-# Prepare test server script
-- name: Prapare directory to clone
-  sudo: yes
-  file:
-    state: directory
-    owner: "{{ ansible_user_id }}"
-    path: "{{ source_path }}"
-- name: Copy whale-server
-  copy:
-    src: /tmp/whale-server/
-      # you must have trailing slash to copy file inside /tmp/whale-server
-      # without slash, it will copy /tmp/whale-server itself
-    dest: "{{ source_path }}"
-- name: npm install
-  npm:
-    path: "{{ source_path }}"
-    state: present
-- name: Install init config
-  sudo: yes
-  template:
-    src: codecheck.conf.j2
-    dest: /etc/init/codecheck.conf
-- name: Start test run server
-  sudo: yes
-  service:
-    name: codecheck
-    state: started
-- name: Cron for docker
-  cron:
-    name: "Clean up docker containers"
-    minute: "0"
-    hour: "*/3"
-    job: "docker rm $(docker ps -f status=exited -q)"
-    state: present
+- include: install-script.yml
+- include: npm-install.yml
+- include: service.yml
+- include: cron.yml

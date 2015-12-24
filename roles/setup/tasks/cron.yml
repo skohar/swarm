@@ -1,0 +1,9 @@
+---
+- name: Cron for docker
+  cron:
+    name: "Clean up docker containers"
+    minute: "0"
+    hour: "*/3"
+    job: "docker rm $(docker ps -f status=exited -q)"
+    state: present
+

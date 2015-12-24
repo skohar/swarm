@@ -1,0 +1,6 @@
+---
+- name: npm install
+  npm:
+    path: "{{ source_path }}"
+    state: present
+

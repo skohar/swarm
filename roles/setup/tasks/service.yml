@@ -1,0 +1,12 @@
+---
+- name: Install init config
+  sudo: yes
+  template:
+    src: codecheck.conf.j2
+    dest: /etc/init/codecheck.conf
+- name: Start test run server
+  sudo: yes
+  service:
+    name: codecheck
+    state: started
+

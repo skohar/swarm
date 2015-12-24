@@ -1,0 +1,9 @@
+---
+- name: Install forever
+  sudo: yes
+  npm:
+    global: yes
+    name: forever
+    state: latest
+    production: yes
+
