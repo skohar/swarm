@@ -13,7 +13,7 @@ packer build -machine-readable -var "AMI_NAME=$AMI_NAME" packer.json 2>&1 | tee 
 tail -2 output.txt | head -2 | awk 'match($0, /ami-.*/) { print substr($0, RSTART, RLENGTH) }' > output.txt
 ls -lha
 cat output.txt
-AMI_ID=$(cat ami.txt)
+AMI_ID=$(cat output.txt)
 RESULT=$?
 kill %1
 [ $RESULT != 0 ] && exit $RESULT
