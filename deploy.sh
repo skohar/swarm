@@ -9,7 +9,10 @@ set -u
 (while true; do echo "Packer is building AMI"; sleep 60; done) & # jobs %1
 source ami_name.sh
 AMI_NAME=$(name)
-packer build -machine-readable -var "AMI_NAME=$AMI_NAME" packer.json 2>&1 | tee output.txt
+TEST=$(packer build -machine-readable -var "AMI_NAME=$AMI_NAME" packer.json)
+echo '==='
+echo $TEST
+echo '==='
 tail -2 output.txt | head -2 | awk 'match($0, /ami-.*/) { print substr($0, RSTART, RLENGTH) }' > output.txt
 ls -lha
 cat output.txt
