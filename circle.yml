@@ -35,6 +35,6 @@ deployment:
     commands:
       - ./deploy.sh "whale-dev"
   develop:
-    branch: fix_bgd
+    branch: develop
     commands:
       - ./deploy.sh "whale-dev"
