@@ -1,12 +1,3 @@
-- name: Get kernel release
-  shell: uname -r
-  register: kernel_release
-  changed_when: false
-- name: Install linux image extra
-  sudo: yes
-  apt:
-    name: linux-image-extra-{{ kernel_release.stdout }}
-    state: latest
 - name: Add new gpg key for docker
   sudo: yes
   apt_key:
@@ -36,6 +27,15 @@
     name: "{{ ansible_user_id }}"
     groups: docker
     append: yes
+- name: Get kernel release
+  shell: uname -r
+  register: kernel_release
+  changed_when: false
+- name: Install linux image extra
+  sudo: yes
+  apt:
+    name: linux-image-extra-{{ kernel_release.stdout }}
+    state: latest
 - name: restart service
   sudo: yes
   service:
