@@ -5,3 +5,4 @@
 # Installing Docker
 - include: docker.yml
 - include: motd.yml
+- include: enable_swap_limit.yml
