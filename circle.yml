@@ -26,7 +26,7 @@ test:
   override:
     - source ami_name.sh && packer validate -var "AMI_NAME=$(name)" packer.json
     - >-
-      DATE=$(date -u +%Y%m%dT%H%M%SZ) &&
+      TF_LOG='TRACE' && DATE=$(date -u +%Y%m%dT%H%M%SZ) &&
       terraform plan -var "launch_configuration_name=$DATE" -var "auto_scaling_group_name=$DATE"
       -var "load_balancers=$LOAD_BALANCER" -var "instance_type=$INSTANCE_TYPE"
       -var "min_size=$MIN_SIZE" -var "desired_capacity=$DESIRED_CAPACITY" -var "max_size=$MAX_SIZE"
