@@ -27,11 +27,10 @@ test:
     - source ami_name.sh && packer validate -var "AMI_NAME=$(name)" packer.json
     - >-
       source ami_name.sh && DATE=$(name) &&
-      terraform plan terraform/attach
-      -var "launch_configuration_name=$DATE" -var "auto_scaling_group_name=$DATE"
+      terraform plan -var "launch_configuration_name=$DATE" -var "auto_scaling_group_name=$DATE"
       -var "load_balancers=$LOAD_BALANCER" -var "instance_type=$INSTANCE_TYPE"
-      -var "min_size=$MIN_SIZE" -var "desired_capacity=$DESIRED_CAPACITY" -var "max_size=$MAX_SIZE" -var "image_id=$AMI_ID"
-      -var-file=terraform-dev.tfvars
+      -var "min_size=$MIN_SIZE" -var "desired_capacity=$DESIRED_CAPACITY" -var "max_size=$MAX_SIZE"
+      -var "image_id=$AMI_ID" -var-file=terraform-dev.tfvars terraform/attach
 deployment:
   production:
     branch: deployment/production
