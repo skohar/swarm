@@ -25,13 +25,7 @@ dependencies:
 test:
   override:
     - source ami_name.sh && packer validate -var "AMI_NAME=$(name)" packer.json
-    - >-
-      TF_LOG='TRACE' && DATE=$(date -u +%Y%m%dT%H%M%SZ) &&
-      terraform plan -var "launch_configuration_name=$DATE" -var "auto_scaling_group_name=$DATE"
-      -var "load_balancers=$LOAD_BALANCER" -var "instance_type=$INSTANCE_TYPE"
-      -var "min_size=$MIN_SIZE" -var "desired_capacity=$DESIRED_CAPACITY" -var "max_size=$MAX_SIZE"
-      -var "image_id=$AMI_ID" -var-file=terraform/attach/terraform-dev.tfvars terraform/attach
-deployment:
+    - TF_LOG='TRACE' DATE=$(date -u +%Y%m%dT%H%M%SZ) LOAD_BALANCER="whale-dev" MIN_SIZE=1 DESIRED_CAPACITY=1 MAX_SIZE=1 INSTANCE_TYPE="t2.micro" AMI_ID="foobar" terraform plan -var "launch_configuration_name=$DATE" -var "auto_scaling_group_name=$DATE" -var "load_balancers=$LOAD_BALANCER" -var "instance_type=$INSTANCE_TYPE" -var "min_size=$MIN_SIZE" -var "desired_capacity=$DESIRED_CAPACITY" -var "max_size=$MAX_SIZE" -var "image_id=$AMI_ID" -var-file=terraform/attach/terraform-dev.tfvars terraform/attachdeployment:
   production:
     branch: deployment/production
     commands:
