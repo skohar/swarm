@@ -12,4 +12,3 @@ variable "desired_capacity" {}
 variable "max_size" {}
 variable "image_id" {}
 variable "instance_type" {}
-
