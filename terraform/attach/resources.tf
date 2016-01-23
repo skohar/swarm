@@ -34,4 +34,3 @@ resource "aws_autoscaling_group" "whale" {
         create_before_destroy = true
     }
 }
-
