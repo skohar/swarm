@@ -4,6 +4,7 @@ machine:
   environment:
     PATH: "${HOME}/bin:${PATH}"
     REGION: us-east-1
+    AWS_DEFAULT_REGION: us-east-1
     SUBNET_ID: subnet-ee4c93d3
     SECURITY_GROUP_ID: sg-ce6bb7a8
     KEY_NAME: code-check-whale

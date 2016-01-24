@@ -6,6 +6,10 @@ if [[ ${1} == "" ]]; then
 fi
 set -u
 
+source generate_ami_name.sh
+AMI_NAME=$(generate_ami_name)
+./deploy-packer.sh
+
 if [[ ${1} == "whale" ]]; then
   INSTANCE_TYPE='t2.medium'
   INSTANCE_NAME='whale'
@@ -23,7 +27,5 @@ else
   MAX_SIZE='1'
   VAR_FILE='terraform-dev.tfvars'
 fi
-AWS_DEFAULT_REGION='us-east-1'
 DATE=$(date -u +%Y%m%dT%H%M%SZ)
-cd $HOME/whale-env/terraform/attach && terraform plan -var "launch_configuration_name=$DATE" -var "auto_scaling_group_name=$DATE" -var "load_balancers=$LOAD_BALANCER" -var "instance_type=$INSTANCE_TYPE" -var "min_size=$MIN_SIZE" -var "desired_capacity=$DESIRED_CAPACITY" -var "max_size=$MAX_SIZE" -var "image_id=$AMI_ID" -var-file=$VAR_FILE
-cd $HOME/whale-env/terraform/attach && terraform apply -var "launch_configuration_name=$DATE" -var "auto_scaling_group_name=$DATE" -var "load_balancers=$LOAD_BALANCER" -var "instance_type=$INSTANCE_TYPE" -var "min_size=$MIN_SIZE" -var "desired_capacity=$DESIRED_CAPACITY" -var "max_size=$MAX_SIZE" -var "image_id=$AMI_ID" -var-file=$VAR_FILE
+./deploy-terraform.sh

@@ -1,7 +1,5 @@
 #!/bin/bash -eux
 (while true; do echo "Packer is building AMI"; sleep 60; done) & # jobs %1
-source ami_name_generate.sh
-AMI_NAME=$(generate_ami_name)
 packer build -machine-readable -var "AMI_NAME=$AMI_NAME" packer.json > packer-build.log
 RESULT=$?
 kill %1
