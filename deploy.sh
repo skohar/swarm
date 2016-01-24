@@ -7,8 +7,8 @@ fi
 set -u
 
 (while true; do echo "Packer is building AMI"; sleep 60; done) & # jobs %1
-source ami_name.sh
-AMI_NAME=$(name)
+source generate_ami_name.sh
+AMI_NAME=$(generate_ami_name)
 packer build -machine-readable -var "AMI_NAME=$AMI_NAME" packer.json > packer-build.log
 RESULT=$?
 # parse 'amazon-ebs: AMIs were created: us-east-1: ami-6cdc8006'
