@@ -6,15 +6,6 @@ if [[ ${1} == "" ]]; then
 fi
 set -u
 
-(while true; do echo "Packer is building AMI"; sleep 60; done) & # jobs %1
-source generate_ami_name.sh
-AMI_NAME=$(generate_ami_name)
-packer build -machine-readable -var "AMI_NAME=$AMI_NAME" packer.json > packer-build.log
-RESULT=$?
-# parse 'amazon-ebs: AMIs were created: us-east-1: ami-6cdc8006'
-AMI_ID=$(tail -1 packer-build.log | awk '{print $6}')
-kill %1
-[ $RESULT != 0 ] && exit $RESULT
 if [[ ${1} == "whale" ]]; then
     INSTANCE_TYPE='t2.medium'
     INSTANCE_NAME='whale'
