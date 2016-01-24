@@ -1,9 +1,9 @@
-#!/bin/bash -eu
+#!/bin/bash -eux
 CIRCLECI_CACHE_DIR="${HOME}/bin"
 PACKER_URL="https://dl.bintray.com/mitchellh/packer/packer_0.8.6_linux_amd64.zip"
 if [ ! -f "${CIRCLECI_CACHE_DIR}/packer" ]; then
-    wget -O /tmp/packer.zip "${PACKER_URL}"
-    unzip -d "${CIRCLECI_CACHE_DIR}" /tmp/packer.zip
+  wget -O /tmp/packer.zip "${PACKER_URL}"
+  unzip -d "${CIRCLECI_CACHE_DIR}" /tmp/packer.zip
 fi
 packer version
 

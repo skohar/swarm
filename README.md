@@ -10,8 +10,8 @@ Sandbox of Test Server for codecheck
 AWS_DEFAULT_REGION='us-east-1' # from CircleCI
 PACKER_LOG='1' # from circle.yml
 source generate_ami_name.sh && packer validate -var "AMI_NAME=$(generate_ami_name)" packer.json # from circle.yml
-source generate_ami_name.sh && packer build -var "AMI_NAME=$(generate_ami_name)" packer.json # from deploy.sh
-./deploy.sh "whale-dev" # from circle.yml
+source generate_ami_name.sh && packer build -var "AMI_NAME=$(generate_ami_name)" packer.json # from deploy-all.sh
+./deploy-all.sh "whale-dev" # from circle.yml
 ```
 
 ## Run test on your environment
@@ -21,17 +21,17 @@ source generate_ami_name.sh && packer build -var "AMI_NAME=$(generate_ami_name)"
 AWS_DEFAULT_REGION='us-east-1' # from CircleCI
 PACKER_LOG='1' # from circle.yml
 source generate_ami_name.sh && packer validate -var "AMI_NAME=$(generate_ami_name)" packer.json # from circle.yml
-source generate_ami_name.sh && packer build -var "AMI_NAME=$(generate_ami_name)" packer.json # from deploy.sh
+source generate_ami_name.sh && packer build -var "AMI_NAME=$(generate_ami_name)" packer.json # from deploy-all.sh
 ```
 
 ### Terraform
 ```
-INSTANCE_TYPE='t2.small' # from deploy.sh
-INSTANCE_NAME='whale-dev' # from deploy.sh
-LOAD_BALANCER='whale-dev' # from deploy.sh
-MIN_SIZE='1' # from deploy.sg
-DESIRED_CAPACITY='1' # from deploy.sh
-MAX_SIZE='1' # from deploy.sh
-VAR_FILE='terraform-dev.tfvars' # from deploy.sh
-terraform plan -var "launch_configuration_name=$DATE" -var "auto_scaling_group_name=$DATE" -var "load_balancers=$LOAD_BALANCER" -var "instance_type=$INSTANCE_TYPE" -var "min_size=$MIN_SIZE" -var "desired_capacity=$DESIRED_CAPACITY" -var "max_size=$MAX_SIZE" -var "image_id=$AMI_ID" -var-file=terraform/attach/terraform-dev.tfvars terraform/attach # from deploy.sh
+INSTANCE_TYPE='t2.small' # from deploy-all.sh
+INSTANCE_NAME='whale-dev' # from deploy-all.sh
+LOAD_BALANCER='whale-dev' # from deploy-all.sh
+MIN_SIZE='1' # from deploy-all.sh
+DESIRED_CAPACITY='1' # from deploy-all.sh
+MAX_SIZE='1' # from deploy-all.sh
+VAR_FILE='terraform-dev.tfvars' # from deploy-all.sh
+terraform plan -var "launch_configuration_name=$DATE" -var "auto_scaling_group_name=$DATE" -var "load_balancers=$LOAD_BALANCER" -var "instance_type=$INSTANCE_TYPE" -var "min_size=$MIN_SIZE" -var "desired_capacity=$DESIRED_CAPACITY" -var "max_size=$MAX_SIZE" -var "image_id=$AMI_ID" -var-file=terraform/attach/terraform-dev.tfvars terraform/attach # from deploy-all.sh
 ```
