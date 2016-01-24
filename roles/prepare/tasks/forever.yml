@@ -6,4 +6,5 @@
     name: forever
     state: latest
     production: yes
-
+- name: Install forever
+  command: npm install --production -g forever
