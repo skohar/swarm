@@ -30,12 +30,12 @@ deployment:
   production:
     branch: deployment/production
     commands:
-      - ./deploy.sh "whale"
+      - ./deploy-all.sh "whale"
   staging:
     branch: master
     commands:
-      - ./deploy.sh "whale-dev"
+      - ./deploy-all.sh "whale-dev"
   develop:
     branch: develop
     commands:
-      - ./deploy.sh "whale-dev"
+      - ./deploy-all.sh "whale-dev"
