@@ -35,3 +35,13 @@ MAX_SIZE='1' # from deploy-all.sh
 VAR_FILE='terraform-dev.tfvars' # from deploy-all.sh
 terraform plan -var "launch_configuration_name=$DATE" -var "auto_scaling_group_name=$DATE" -var "load_balancers=$LOAD_BALANCER" -var "instance_type=$INSTANCE_TYPE" -var "min_size=$MIN_SIZE" -var "desired_capacity=$DESIRED_CAPACITY" -var "max_size=$MAX_SIZE" -var "image_id=$AMI_ID" -var-file=terraform/attach/terraform-dev.tfvars terraform/attach # from deploy-all.sh
 ```
+
+### How to test ansible-playbook on local
+*This is safety script to AWS infrastructure*
+```
+~/src/whale-env (master ✘)✭ ᐅ vagrant box add ubuntu1404 https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
+~/src/whale-env (master ✘)✭ ᐅ vagrant up
+~/src/whale-env (master ✘)✭ ᐅ asp codecheck
+~/src/whale-env (master ✘)✭ ᐅ aws s3 cp s3://code-check-config-packer/env.json .                               <aws:codecheck>
+~/src/whale-env (master ✘)✭ ᐅ ansible-playbook -i inventories/vagrant playbook.yml --extra-vars="@env.json"    <aws:codecheck>
+```
