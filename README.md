@@ -9,8 +9,8 @@ Sandbox of Test Server for codecheck
 ```
 AWS_DEFAULT_REGION='us-east-1' # from CircleCI
 PACKER_LOG='1' # from circle.yml
-source ami_name.sh && packer validate -var "AMI_NAME=$(name)" packer.json # from circle.yml
-source ami_name.sh && packer build -var "AMI_NAME=$(name)" packer.json # from deploy.sh
+source generate_ami_name.sh && packer validate -var "AMI_NAME=$(generate_ami_name)" packer.json # from circle.yml
+source generate_ami_name.sh && packer build -var "AMI_NAME=$(generate_ami_name)" packer.json # from deploy.sh
 ./deploy.sh "whale-dev" # from circle.yml
 ```
 
@@ -20,8 +20,8 @@ source ami_name.sh && packer build -var "AMI_NAME=$(name)" packer.json # from de
 ```
 AWS_DEFAULT_REGION='us-east-1' # from CircleCI
 PACKER_LOG='1' # from circle.yml
-source ami_name.sh && packer validate -var "AMI_NAME=$(name)" packer.json # from circle.yml
-source ami_name.sh && packer build -var "AMI_NAME=$(name)" packer.json # from deploy.sh
+source generate_ami_name.sh && packer validate -var "AMI_NAME=$(generate_ami_name)" packer.json # from circle.yml
+source generate_ami_name.sh && packer build -var "AMI_NAME=$(generate_ami_name)" packer.json # from deploy.sh
 ```
 
 ### Terraform

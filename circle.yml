@@ -24,7 +24,7 @@ dependencies:
     - ./install_softwares.sh
 test:
   override:
-    - source ami_name.sh && packer validate -var "AMI_NAME=$(name)" packer.json
+    - source generate_ami_name.sh && packer validate -var "AMI_NAME=$(generate_ami_name)" packer.json
 deployment:
   production:
     branch: deployment/production
