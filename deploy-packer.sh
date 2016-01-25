@@ -1,4 +1,5 @@
 #!/bin/bash -eux
+AMI_NAME=${1}
 (while true; do echo "Packer is building AMI"; sleep 60; done) & # jobs %1
 packer build -machine-readable -var "AMI_NAME=$AMI_NAME" packer.json > packer-build.log
 RESULT=$?

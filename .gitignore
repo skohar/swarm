@@ -2,3 +2,4 @@
 packer-build.log
 *.tfstate
 *.tfstate.backup
+/env.json
