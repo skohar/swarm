@@ -39,9 +39,9 @@ terraform plan -var "launch_configuration_name=$DATE" -var "auto_scaling_group_n
 ### How to test ansible-playbook on local
 *This is safety script to AWS infrastructure*
 ```
-~/src/whale-env (master ✘)✭ ᐅ vagrant box add ubuntu1404 https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
-~/src/whale-env (master ✘)✭ ᐅ vagrant up
-~/src/whale-env (master ✘)✭ ᐅ asp codecheck
-~/src/whale-env (master ✘)✭ ᐅ aws s3 cp s3://code-check-config-packer/env.json .                               <aws:codecheck>
-~/src/whale-env (master ✘)✭ ᐅ ansible-playbook -i inventories/vagrant playbook.yml --extra-vars="@env.json"    <aws:codecheck>
+$ vagrant box add ubuntu1404 https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
+$ vagrant up
+$ asp codecheck
+$ aws s3 cp s3://code-check-config-packer/env.json .                               <aws:codecheck>
+$ ansible-playbook -i inventories/vagrant playbook.yml --extra-vars="@env.json"    <aws:codecheck>
 ```
