@@ -1,10 +1,4 @@
 ---
 - name: Install forever
   sudo: yes
-  npm:
-    global: yes
-    name: forever
-    state: latest
-    production: yes
-- name: Install forever
-  command: npm install --production -g forever
+  shell: npm install --production -g forever
