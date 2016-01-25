@@ -25,11 +25,9 @@
   failed_when: start_docker_service.rc != 0
 - name: Pull docker
   sudo: yes
-  docker:
-    registry: hub.docker.com
-    image: givery/codecheck
-    state: reloaded
-    pull: always
-  register: docker_pull
-  changed_when: docker_pull.summary.pulled != 0
-
+  shell: docker pull givery/codecheck:latest
+- name: Check to succeeded docker pull
+  sudo: yes
+  shell: docker images | grep givery/codecheck
+  register: result
+  failed_when: result.rc == 1
