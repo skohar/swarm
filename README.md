@@ -18,10 +18,11 @@ source generate_ami_name.sh && packer build -var "AMI_NAME=$(generate_ami_name)"
 ### Packer
 *This script create AMI on AWS*
 ```
-AWS_DEFAULT_REGION='us-east-1' # from CircleCI
-PACKER_LOG='1' # from circle.yml
-source generate_ami_name.sh && packer validate -var "AMI_NAME=$(generate_ami_name)" packer.json # from circle.yml
-source generate_ami_name.sh && packer build -var "AMI_NAME=$(generate_ami_name)" packer.json # from deploy-all.sh
+$ asp codecheck
+$ source generate_ami_name.sh
+$ AMI_NAME=$(generate_ami_name)
+$ packer validate -var "AMI_NAME=$AMI_NAME" packer.json
+$ ./deploy-packer.sh $AMI_NAME > packer-build.log
 ```
 
 ### Terraform
