@@ -30,12 +30,16 @@ deployment:
   production:
     branch: deployment/production
     commands:
-      - ./deploy-all.sh "whale"
+      - ./deploy-all.sh "whale":
+          timeout: 2400
   staging:
     branch: master
     commands:
-      - ./deploy-all.sh "whale-dev"
+      - ./deploy-all.sh "whale-dev":
+          timeout: 2400
+
   develop:
     branch: develop
     commands:
-      - ./deploy-all.sh "whale-dev"
+      - ./deploy-all.sh "whale-dev":
+          timeout: 2400
