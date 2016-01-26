@@ -7,8 +7,8 @@ fi
 set -u
 
 source generate_ami_name.sh
-export AMI_NAME=$(generate_ami_name)
-./deploy-packer.sh $AMI_NAME
+AMI_NAME=$(generate_ami_name)
+export AMI_ID=$(./deploy-packer.sh $AMI_NAME)
 
 if [[ ${1} == "whale" ]]; then
   export INSTANCE_TYPE='t2.medium'
@@ -28,4 +28,4 @@ else
   export VAR_FILE='terraform-dev.tfvars'
 fi
 export DATE=$(date -u +%Y%m%dT%H%M%SZ)
-./deploy-terraform.sh ${1}
+./deploy-terraform.sh
