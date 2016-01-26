@@ -35,6 +35,9 @@
   apt:
     name: linux-image-extra-{{ kernel_release.stdout }}
     state: latest
+- name: Add device driver aufs
+  sudo : yes
+  shell: sed -i '/DOCKER_OPTS=/c\DOCKER_OPTS="--storage-driver=aufs"' /etc/default/docker
 - name: restart service
   sudo: yes
   service:
