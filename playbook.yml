@@ -1,5 +1,5 @@
 - hosts: all
-  sudo: no
+  become: no
   roles:
     - initial-install
     - prepare

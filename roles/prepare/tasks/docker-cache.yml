@@ -1,6 +1,6 @@
 ---
 - name: Create cache container
-  sudo: yes
+  become: yes
   docker:
     name: cache-master
     image: givery/codecheck:latest

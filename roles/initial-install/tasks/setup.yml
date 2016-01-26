@@ -1,17 +1,17 @@
 ---
 - name: Update system package
-  sudo: yes
+  become: yes
   apt:
     state: present
     update_cache: yes
 - name: Configure resolvconf
-  sudo: yes
+  become: yes
   lineinfile:
     dest: /etc/resolvconf/resolv.conf.d/base
     line: 'options single-request-reopen'
   register: modify_resolvconf
 - name: Update resolvconf
   when: modify_resolvconf | changed
-  sudo: yes
+  become: yes
   command: resolvconf -u
 

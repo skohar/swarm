@@ -1,33 +1,33 @@
 ---
 # Installing pip
 - name: Installing pip
-  sudo: yes
+  become: yes
   apt:
     name: python-pip
 # Install docker-py to avoid ansible bug
 # https://github.com/ansible/ansible-modules-core/issues/1792
 - name: Install Docker py
-  sudo: yes
+  become: yes
   pip:
     name: docker-py
 # pull docker image from Docker Hub
 - name: verify if docker is running
-  sudo: yes
+  become: yes
   shell: docker info
   register: verify_docker_info
   failed_when: False
   changed_when: verify_docker_info.rc != 0
 - name: start docker service
   when: verify_docker_info | changed
-  sudo: yes
+  become: yes
   shell: service docker start
   register: start_docker_service
   failed_when: start_docker_service.rc != 0
 - name: Pull docker
-  sudo: yes
+  become: yes
   shell: docker pull givery/codecheck:latest
 - name: Check to succeeded docker pull
-  sudo: yes
+  become: yes
   shell: docker images | grep givery/codecheck
   register: result
   failed_when: result.rc == 1
