@@ -14,7 +14,7 @@ Vagrant.configure(2) do |config|
     config.vm.define name do |server|
       server.vm.box = box
       server.vm.hostname = name
-      server.vm.network "private_network", ip: "192.168.66." + addr.to_s
+      server.vm.network "private_network", type: "dhcp"
     end
   end
 end
