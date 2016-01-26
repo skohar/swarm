@@ -32,12 +32,8 @@
       ]
     },
     {
-      "type": "shell",
-      "inline_shebang": "/bin/bash -e",
-      "inline": [
-        "aws s3 cp s3://code-check-config-packer/env.json .",
-        "mv env.json /tmp"
-      ]
+      "type": "shell-local",
+      "command": "aws s3 cp s3://code-check-config-packer/env.json ."
     },
     {
       "type": "shell-local",
@@ -56,7 +52,7 @@
       "inventory_file": "{{template_dir}}/inventories/aws",
       "extra_arguments": [
         "--extra-vars",
-        "@/tmp/env.json"
+        "@env.json"
       ]
     }
   ]
