@@ -46,7 +46,7 @@
     },
     {
       "type": "ansible-local",
-      "command": "ansible-playbook",
+      "command": "ansible-playbook -vvvvv",
       "playbook_file": "{{template_dir}}/playbook.yml",
       "playbook_dir": "{{template_dir}}",
       "inventory_file": "{{template_dir}}/inventories/aws",
