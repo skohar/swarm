@@ -2,7 +2,6 @@
 - name: Update system package
   sudo: yes
   apt:
-    upgrade: safe
     state: present
     update_cache: yes
 - name: Configure resolvconf

@@ -13,7 +13,6 @@
 - name: Update apt
   sudo: yes
   apt:
-    upgrade: safe
     update_cache: yes
     state: latest
 - name: Install docker
