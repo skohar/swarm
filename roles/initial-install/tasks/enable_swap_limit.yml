@@ -1,3 +1,3 @@
 - name: Enable docker swap limit
   script: enable_swap_limit.sh
-  sudo: yes
+  become: yes

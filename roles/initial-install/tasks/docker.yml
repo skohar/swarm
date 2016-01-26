@@ -1,27 +1,27 @@
 - name: Add new gpg key for docker
-  sudo: yes
+  become: yes
   apt_key:
     keyserver: "hkp://pgp.mit.edu:80"
     id: 58118E89F3A912897C070ADBF76221572C52609D
     state: present
 - name: Set docker.list for apt
-  sudo: yes
+  become: yes
   template:
     dest: /etc/apt/sources.list.d/docker.list
     src: docker.list.j2
     force: yes
 - name: Update apt
-  sudo: yes
+  become: yes
   apt:
     update_cache: yes
     state: latest
 - name: Install docker
-  sudo: yes
+  become: yes
   apt:
     name: docker-engine
     state: latest
 - name: Update group to enable docker without sudo
-  sudo: yes
+  become: yes
   user:
     name: "{{ ansible_user_id }}"
     groups: docker
@@ -31,7 +31,7 @@
   register: kernel_release
   changed_when: false
 - name: Install linux image extra
-  sudo: yes
+  become: yes
   apt:
     name: linux-image-extra-{{ kernel_release.stdout }}
     state: latest
@@ -39,7 +39,7 @@
   sudo : yes
   shell: sed -i '/DOCKER_OPTS=/c\DOCKER_OPTS="--storage-driver=aufs"' /etc/default/docker
 - name: restart service
-  sudo: yes
+  become: yes
   service:
     name: docker
     enabled: yes

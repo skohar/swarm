@@ -6,10 +6,10 @@
   changed_when: verify_node.rc in [1, 127]
 - name: Download node package
   when: verify_node | changed
-  sudo: yes
+  become: yes
   shell: curl -sL https://deb.nodesource.com/setup_{{node_version}} | bash -
 - name: Install NodeJS
-  sudo: yes
+  become: yes
   apt:
     name: nodejs
 

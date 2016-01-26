@@ -1,6 +1,6 @@
 # Prepare test server script
 - name: Prapare directory to clone
-  sudo: yes
+  become: yes
   file:
     state: directory
     owner: "{{ ansible_user_id }}"
