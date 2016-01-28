@@ -1,3 +1,8 @@
+- name: Configure rsyslog
+  become: yes
+  shell: sh -c 'echo "*.* @$papertrail_host" >> /etc/rsyslog.conf'
+  environment:
+    papertrail_host: "{{ papertrail_host }}"
 - name: Add new gpg key for docker
   become: yes
   apt_key:

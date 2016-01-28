@@ -1,2 +1,3 @@
 ---
 node_version: 4.x
+papertrail_host: "{{ papertrail_host_dev }}"
