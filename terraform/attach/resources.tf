@@ -24,7 +24,7 @@ resource "aws_autoscaling_group" "whale" {
     name = "${var.auto_scaling_group_name}"
     launch_configuration = "${aws_launch_configuration.whale.name}"
     availability_zones = ["${var.availability_zones}"]
-    vpc_zone_identifier= ["${var.subnet_id}"]
+    vpc_zone_identifier = ["${var.subnet_id}"]
     load_balancers = ["${var.load_balancers}"]
     health_check_grace_period = 300
     health_check_type = "ELB"
