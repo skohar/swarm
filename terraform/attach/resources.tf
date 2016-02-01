@@ -11,7 +11,8 @@ resource "aws_launch_configuration" "whale" {
     associate_public_ip_address = "true"
     enable_monitoring = "true"
     root_block_device = {
-        volume_size = "100"
+        volume_type = "${var.volume_type}"
+        volume_size = "${var.volume_size}"
         delete_on_termination = "true"
     }
     lifecycle {
