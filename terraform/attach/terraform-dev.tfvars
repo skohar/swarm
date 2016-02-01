@@ -1,6 +1,7 @@
 region = "us-east-1"
 availability_zones = "us-east-1e"
 subnet_id = "subnet-ee4c93d3"
+instance_type = "t2.small"
 key_name = "code-check-whale"
 security_groups = "sg-ce6bb7a8"
 volume_size = "150"
