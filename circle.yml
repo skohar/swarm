@@ -37,9 +37,8 @@ deployment:
     commands:
       - ./deploy-all.sh "whale-dev":
           timeout: 2400
-
   develop:
-    branch: develop
+    branch: /feature-.*/
     commands:
       - ./deploy-all.sh "whale-dev":
           timeout: 2400
