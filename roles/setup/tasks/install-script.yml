@@ -6,17 +6,8 @@
     owner: "{{ ansible_user_id }}"
     path: "{{ source_path }}"
 - name: Clone whale-server
-  when: env == "vagrant"
   git:
     accept_hostkey: yes
     repo: https://{{ github_token }}@github.com/givery-technology/whale-server.git
     dest: "{{ source_path }}"
     recursive: no
-- name: Copy whale-server
-  when: env == "aws"
-  copy:
-    src: /tmp/whale-server/
-      # you must have trailing slash to copy file inside /tmp/whale-server
-      # without slash, it will copy /tmp/whale-server itself
-    dest: "{{ source_path }}"
-

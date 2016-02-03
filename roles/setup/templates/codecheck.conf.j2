@@ -1,17 +1,41 @@
+# vim: set ft=sh :
 description "codecheck test running server AKA whale"
 # Environment variables used in github.com/givery-technology/whale-server
 ## Paper trail
 env PAPERTRAIL_HOST={{ papertrail_host }}
 ## Docker
-env DOCKER_OPTIONS="--volumes-from='cache-master' --memory='512M' --memory-swap='-1' --memory-swappiness='0'"
 # env DOCKER_TIMEOUT=600 # Default is 10 minutes
-# env DOCKER_CONCURRENCY=5
-env DOCKER_IMAGE_NAME={{ docker_image }}
-env DOCKER_IMAGE_VERSION={{ docker_tag }}
 
 start on startup
 stop on runlevel [!2345]
 
-# `--append` option is needed when you specified log file which exsists, even /dev/null
-exec forever start --uid "whale" -l /dev/null -m 1 --append {{ source_path }}/server.js
+script
+  forever stopall
+  swapoff -a
+  [ -f /swapfile ] && rm /swapfile
 
+  export SYSTEM_MEM=1536 # This number is sum of the instance's daemon and node uses memory
+  export DOCKER_MEM=256
+  export DOCKER_SWAP_MEM=1024
+  export DOCKER_IMAGE_NAME=givery/codecheck
+  export DOCKER_IMAGE_VERSION=latest
+  export DOCKER_OPTIONS="--volumes-from='cache-master' --memory=${DOCKER_MEM}M --memory-swap=${DOCKER_SWAP_MEM}M"
+  concurrencyNumber () {
+    totalUsableMemory=$(free -m | awk 'NR==2 {print $2}')
+    usableMemoryForDocker=$(echo "$totalUsableMemory-$SYSTEM_MEM" | bc)
+    echo "$usableMemoryForDocker/$DOCKER_MEM" | bc
+  }
+  export DOCKER_CONCURRENCY=$(concurrencyNumber)
+  export SWAP_SIZE=$(echo "$DOCKER_SWAP_MEM * $DOCKER_CONCURRENCY" | bc)
+  echo "DOCKER_OPTIONS: $DOCKER_OPTIONS"
+  echo "DOCKER_CONCURRENCY: $DOCKER_CONCURRENCY"
+  echo "SWAP_SIZE: $SWAP_SIZE"
+  fallocate -l ${SWAP_SIZE}M /swapfile
+  chmod 600 /swapfile
+  mkswap /swapfile
+  swapon /swapfile
+  df -h
+  cat /proc/swaps
+  cat /proc/meminfo
+  forever start --uid "whale" -l /dev/null -m 1 --append {{ source_path }}/server.js
+end script

@@ -11,7 +11,8 @@ resource "aws_launch_configuration" "whale" {
     associate_public_ip_address = "true"
     enable_monitoring = "true"
     root_block_device = {
-        volume_size = "100"
+        volume_type = "${var.volume_type}"
+        volume_size = "${var.volume_size}"
         delete_on_termination = "true"
     }
     lifecycle {
@@ -23,7 +24,7 @@ resource "aws_autoscaling_group" "whale" {
     name = "${var.auto_scaling_group_name}"
     launch_configuration = "${aws_launch_configuration.whale.name}"
     availability_zones = ["${var.availability_zones}"]
-    vpc_zone_identifier= ["${var.subnet_id}"]
+    vpc_zone_identifier = ["${var.subnet_id}"]
     load_balancers = ["${var.load_balancers}"]
     health_check_grace_period = 300
     health_check_type = "ELB"
