@@ -7,7 +7,7 @@ Vagrant.require_version ">= 1.8.1"
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
 # you're doing.
-Vagrant.configure(2) do |config|
+Vagrant.configure("2") do |config|
   # Ubuntu 14.04 LTS box from
   # https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box
   box = "ubuntu1404"
@@ -15,7 +15,7 @@ Vagrant.configure(2) do |config|
     vm.customize ["modifyvm", :id, "--memory", "2048"]
   end
   (10..10).each do |addr|
-    name = "cc-sandbox-" + addr.to_s
+    name = "whale." + "#{`hostname`}".split(".").first.chomp + ".local"
     config.vm.define name do |server|
       server.vm.box = box
       server.vm.hostname = name
