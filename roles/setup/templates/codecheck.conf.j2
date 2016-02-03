@@ -21,6 +21,9 @@ script
   export DOCKER_OPTIONS="--volumes-from='cache-master' --memory=${DOCKER_MEM}M --memory-swap=${DOCKER_SWAP_MEM}M"
   export DOCKER_CONCURRENCY=$(echo "($(free -m | awk 'NR==2 {print $2}')-$SYSTEM_MEM)/$DOCKER_MEM" | bc)
   export SWAP_SIZE=$(echo "$DOCKER_SWAP_MEM * $DOCKER_CONCURRENCY" | bc)
+  echo "DOCKER_OPTIONS: $DOCKER_OPTIONS"
+  echo "DOCKER_CONCURRENCY: $DOCKER_CONCURRENCY"
+  echo "SWAP_SIZE: $SWAP_SIZE"
   fallocate -l ${SWAP_SIZE}M /swapfile
   chmod 600 /swapfile
   mkswap /swapfile
