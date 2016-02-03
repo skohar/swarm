@@ -33,7 +33,7 @@ Vagrant.configure("2") do |config|
   end
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "v"
-   # ansible.raw_arguments = ["--extra-vars=@env.json"]
+    ansible.raw_arguments = ["--extra-vars=@env.json"]
     ansible.playbook = "playbook.yml"
   end
   config.vm.provision "shell" do |s|
