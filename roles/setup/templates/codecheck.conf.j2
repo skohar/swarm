@@ -1,3 +1,4 @@
+# vim: set ft=sh :
 description "codecheck test running server AKA whale"
 # Environment variables used in github.com/givery-technology/whale-server
 ## Paper trail
@@ -19,7 +20,12 @@ script
   export DOCKER_IMAGE_NAME=givery/codecheck
   export DOCKER_IMAGE_VERSION=latest
   export DOCKER_OPTIONS="--volumes-from='cache-master' --memory=${DOCKER_MEM}M --memory-swap=${DOCKER_SWAP_MEM}M"
-  export DOCKER_CONCURRENCY=$(echo "($(free -m | awk 'NR==2 {print $2}')-$SYSTEM_MEM)/$DOCKER_MEM" | bc)
+  concurrencyNumber () {
+    totalUsableMemory=$(free -m | awk 'NR==2 {print $2}')
+    usableMemoryForDocker=$(echo "$totalUsableMemory-$SYSTEM_MEM" | bc)
+    echo "$usableMemoryForDocker/$DOCKER_MEM" | bc
+  }
+  export DOCKER_CONCURRENCY=$(concurrencyNumber)
   export SWAP_SIZE=$(echo "$DOCKER_SWAP_MEM * $DOCKER_CONCURRENCY" | bc)
   echo "DOCKER_OPTIONS: $DOCKER_OPTIONS"
   echo "DOCKER_CONCURRENCY: $DOCKER_CONCURRENCY"
