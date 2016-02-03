@@ -4,4 +4,3 @@ localhost
 [aws:vars]
 ansible_user=ubuntu
 ansible_connection=local
-env=aws
