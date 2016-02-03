@@ -41,7 +41,7 @@ Vagrant.configure("2") do |config|
     s.privileged = true
   end
   config.vm.provision "shell" do |s|
-    s.inline = "ausermod -a -G docker dd-agent"
+    s.inline = "usermod -a -G docker dd-agent"
     s.privileged = true
   end
   config.vm.provision "shell" do |s|
