@@ -14,7 +14,7 @@ script
   swapoff -a
   [ -f /swapfile ] && rm /swapfile
 
-  export SYSTEM_MEM=1024 # This number is sum of the instance's daemon and node uses memory
+  export SYSTEM_MEM=1536 # This number is sum of the instance's daemon and node uses memory
   export DOCKER_MEM=256
   export DOCKER_SWAP_MEM=1024
   export DOCKER_IMAGE_NAME=givery/codecheck
