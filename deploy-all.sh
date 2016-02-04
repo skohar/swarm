@@ -15,7 +15,7 @@ if [[ ${1} == "whale" ]]; then
   export LOAD_BALANCER='whale'
   export MIN_SIZE='2'
   export DESIRED_CAPACITY='2'
-  export MAX_SIZE='5'
+  export MAX_SIZE='2'
   export VAR_FILE='terraform-prod.tfvars'
 else
   export INSTANCE_NAME='whale-dev'
