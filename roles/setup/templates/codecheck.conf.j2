@@ -37,5 +37,5 @@ script
   df -h
   cat /proc/swaps
   cat /proc/meminfo
-  forever start --uid "whale" -l /dev/null -m 1 --append {{ source_path }}/server.js
+  forever start --uid "whale" -m 1 --append {{ source_path }}/server.js
 end script
