@@ -2,3 +2,4 @@
 - include: npm-install.yml
 - include: service.yml
 - include: cron.yml
+- include: newrelic.yml

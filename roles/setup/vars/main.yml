@@ -1,6 +1,7 @@
 ---
 github_token: "{{ lookup('env', 'GITHUB_TOKEN') }}"
 papertrail_host: "{{ lookup('env', 'PAPERTRAIL_HOST') }}"
+newrelic_licence_key: "{{ newrelic_licence_key }}"
 docker_image: givery/codecheck
 docker_tag: latest
 source_path: /var/whale-server
