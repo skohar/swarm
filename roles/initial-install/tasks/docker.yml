@@ -50,8 +50,7 @@
     enabled: yes
     state: restarted
   changed_when: False
-- name: Install New Relic
-  become: yes
-  shell: wget -L https://download.newrelic.com/debian/dists/newrelic/non-free/binary-amd64/newrelic-sysmond_2.3.0.129_amd64.deb && dpkg -i newrelic-sysmond_2.3.0.129_amd64.deb && nrsysmond-config --set license_key=$newrelic_license_key
+- name: Install Datadog
+  shell: DD_API_KEY=$datadog_api_key DD_INSTALL_ONLY=true bash -c "$(curl -L https://raw.githubusercontent.com/DataDog/dd-agent/master/packaging/datadog-agent/source/install_agent.sh)"
   environment:
-    newrelic_license_key: "{{ newrelic_license_key }}"
+    datadog_api_key: "{{ datadog_api_key }}"
