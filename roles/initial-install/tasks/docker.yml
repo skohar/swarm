@@ -50,3 +50,8 @@
     enabled: yes
     state: restarted
   changed_when: False
+- name: Install New Relic
+  become: yes
+  shell: wget -L https://download.newrelic.com/debian/dists/newrelic/non-free/binary-amd64/newrelic-sysmond_2.3.0.129_amd64.deb && dpkg -i newrelic-sysmond_2.3.0.129_amd64.deb && nrsysmond-config --set license_key=$newrelic_license_key
+  environment:
+    newrelic_license_key: "{{ newrelic_license_key }}"
