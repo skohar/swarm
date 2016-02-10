@@ -5,6 +5,6 @@
     wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
     apt-get update
     apt-get install newrelic-sysmond
-    nrsysmond-config --set license_key=$newrelic_licence_key
+    nrsysmond-config --set license_key=$newrelic_license_key
   environment:
-    newrelic_licence_key: "{{ newrelic_licence_key }}"
+    newrelic_licence_key: "{{ newrelic_license_key }}"
