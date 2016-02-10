@@ -7,4 +7,4 @@
     apt-get install newrelic-sysmond
     nrsysmond-config --set license_key=$newrelic_license_key
   environment:
-    newrelic_licence_key: "{{ newrelic_license_key }}"
+    newrelic_license_key: "{{ newrelic_license_key }}"
